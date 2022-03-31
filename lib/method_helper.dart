@@ -17,10 +17,10 @@ class GameUtils {
   static const String MG_SELF_CAPTAIN ="mg_self_captain"; // 设置队长
   static const String MG_SELF_END ="mg_self_end"; // 结束游戏
 
-  GameUpdateCodeCallback? _updateCodeCallback;
+  GameUpdateCodeCallback _updateCodeCallback;
 
-  late MethodChannel _methodChannel;
-  static GameUtils? _helper;
+  MethodChannel _methodChannel;
+  static GameUtils _helper;
   _init() {
     _helper = GameUtils.getInstance();
   }
@@ -31,7 +31,7 @@ class GameUtils {
       instance._initChannelHandler();
       _helper = instance;
     }
-    return _helper!;
+    return _helper;
   }
 
   /// 初始化通道处理器

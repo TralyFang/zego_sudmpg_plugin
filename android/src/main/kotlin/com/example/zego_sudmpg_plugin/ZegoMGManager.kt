@@ -2,6 +2,8 @@ package com.example.zego_sudmpg_plugin
 
 import com.example.zego_sudmpg_plugin.hello.config.SudMGCfg
 import com.example.zego_sudmpg_plugin.hello.utils.UserUtils
+import java.time.LocalDateTime
+import java.util.*
 
 /**
  * 相关配置管理，初始化游戏的
@@ -16,8 +18,8 @@ class ZegoMGManager private constructor(){
     }
 
     /** app 配置信息 */
-    val APP_ID = "1461564080052506636"
-    val APP_KEY = "03pNxK2lEXsKiiwrBQ9GbH541Fk2Sfnc"
+    var APP_ID = "1461564080052506636"
+    var APP_KEY = "03pNxK2lEXsKiiwrBQ9GbH541Fk2Sfnc"
 
     /** false:生产环境 true:测试环境  */
     var kIsTestEnv = true
@@ -40,6 +42,7 @@ class ZegoMGManager private constructor(){
 
     /** APP接入方服务端生成Code 具有实效性的，过期需要更新的  */
     var APP_Code = ""
+    var APP_Code_expireDate = ""
 
     /** Login获取Code的URL  */
     val kLoginUrl = "https://fat-mgp-hello.sudden.ltd/login/v3"

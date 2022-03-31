@@ -82,7 +82,7 @@ public class GameView {
         {
             login(MGConfig.getUserId(), mAppLoginCallback);
             /// TODO: Flutter的处理逻辑
-            mAppLoginCallback.onLoginSuccess(0, MGConfig.getAPP_Code(), "");
+            mAppLoginCallback.onLoginSuccess(0, MGConfig.getAPP_Code(), MGConfig.getAPP_Code_expireDate());
         }
     }
 
@@ -554,7 +554,7 @@ public class GameView {
      */
     private void login(String userId, AppLoginListener listener){
         ///TODO: 测试代码，这里不需要处理，直接交给Flutter逻辑处理
-        login1(userId, listener);
+//        login1(userId, listener);
     }
     private void login1(String userId, AppLoginListener listener) {
         OkHttpClient client = new OkHttpClient();
@@ -573,6 +573,7 @@ public class GameView {
                 .url(MGConfig.getKLoginUrl())
                 .post(body)
                 .build();
+        Log.d("tag", "request==="+request.toString()+"==="+body.toString()+req);
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(@NonNull Call call, @NonNull IOException e) {
@@ -593,7 +594,7 @@ public class GameView {
                     String newCode = dataObject.getString("code");
                     String expireDate = dataObject.getString("expire_date");
                     String avatarUrl = dataObject.getString("avatar_url");
-
+                    Log.d("tag", "dataJson==="+dataJson);
                     ThreadUtils.postUITask(() -> {
                         if (listener != null) {
                             listener.onLoginSuccess(ret_code, newCode, expireDate);

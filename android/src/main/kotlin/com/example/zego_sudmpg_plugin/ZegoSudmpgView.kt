@@ -51,6 +51,12 @@ class ZegoSudmpgView(private var context: Context, messenger: BinaryMessenger?, 
 //        ZegoMGManager.instance.APP_Code = params["appCode"].toString()
 //        ZegoMGManager.instance.mMGID = params["mgId"].toString().toLongOrNull() ?:SudMGCfg.MG_ID_BUMPER_CAR
 
+        params["appKey"]?.toString()?.let {
+            ZegoMGManager.instance.APP_KEY = it
+        }
+        params["appId"]?.toString()?.let {
+            ZegoMGManager.instance.APP_ID = it
+        }
         params["roomId"]?.toString()?.let {
             ZegoMGManager.instance.roomId = it
         }
@@ -60,8 +66,14 @@ class ZegoSudmpgView(private var context: Context, messenger: BinaryMessenger?, 
         params["appCode"]?.toString()?.let {
             ZegoMGManager.instance.APP_Code = it
         }
-        params["mgId"]?.toString()?.toLong()?.let {
-            ZegoMGManager.instance.mMGID = it
+        params["expireDate"]?.toString()?.let {
+            ZegoMGManager.instance.APP_Code_expireDate = it
+        }
+        if (params["mgId"]?.toString().isNullOrEmpty()){
+        }else {
+            params["mgId"]?.toString()?.toLong()?.let {
+                ZegoMGManager.instance.mMGID = it
+            }
         }
 
         Log.i(TAG, "gameInit.params: $params, mgId: ${ZegoMGManager.instance.mMGID}, appCode: ${ZegoMGManager.instance.APP_Code}")
@@ -78,7 +90,7 @@ class ZegoSudmpgView(private var context: Context, messenger: BinaryMessenger?, 
     }
 
     override fun onMethodCall(call: MethodCall, result: MethodChannel.Result) {
-        Log.i(TAG, "gameMethodCall: $call")
+        Log.i(TAG, "gameMethodCall: ${call.method}")
         if (call != null){
             when(call.method){
                 GameUtils.MG_SELF_IN->{ // 加入游戏

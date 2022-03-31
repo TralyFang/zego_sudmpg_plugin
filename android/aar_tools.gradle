@@ -31,11 +31,11 @@ void copyAar2Host(String pluginGroup) {
 //            println("${p.name} isHost --> ${isApp}")
             if (p.group == pluginGroup) {
                 currentProject = p
-                println("Plugin project name --> $currentProject")
+//                println("Plugin project name --> $currentProject")
             }
             if (isApp) {
                 appProject = p
-                println("Host project name -->  ${p.name}")
+//                println("Host project name -->  ${p.name}")
 
             }
     }
@@ -46,7 +46,7 @@ void copyAar2Host(String pluginGroup) {
             libs.listFiles().each {
                 f ->
                     if (f.name.endsWith('.aar')) {
-                        println("aar name --> ${f.name}")
+//                        println("aar name --> ${f.name}")
                         aarFiles.add(f)
                     }
             }

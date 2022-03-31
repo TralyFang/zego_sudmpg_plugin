@@ -6,7 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:zego_sudmpg_plugin/method_helper.dart';
 
 class PlatformGameView extends StatefulWidget {
-  const PlatformGameView({Key? key}) : super(key: key);
+  const PlatformGameView({Key key}) : super(key: key);
 
   @override
   _PlatformGameViewState createState() => _PlatformGameViewState();
@@ -47,12 +47,12 @@ class _PlatformGameViewState extends State<PlatformGameView> {
   Widget platformView() {
 
     var params = {
-      "roomId": "",
-      "userId":"",
-      "appCode":"", // appcode
-      "mgId":"", // 游戏id
-      "appKey": "", // appkey
-      "appId":"", // appId
+      // "roomId": "",
+      // "userId":"",
+      // "appCode":"", // appcode
+      // "mgId":"", // 游戏id
+      // "appKey": "", // appkey
+      // "appId":"", // appId
     };
 
     if(Platform.isAndroid){
