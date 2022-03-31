@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
-import 'package:zego_sudmpg_plugin_example/method_helper.dart';
+import 'package:zego_sudmpg_plugin/method_helper.dart';
 
 class PlatformGameView extends StatefulWidget {
   const PlatformGameView({Key? key}) : super(key: key);

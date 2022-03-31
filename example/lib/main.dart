@@ -5,7 +5,7 @@ import 'dart:async';
 
 import 'package:flutter/services.dart';
 import 'package:zego_sudmpg_plugin/zego_sudmpg_plugin.dart';
-import 'package:zego_sudmpg_plugin_example/platform_game_view.dart';
+import 'package:zego_sudmpg_plugin/platform_game_view.dart';
 
 void main() {
   runApp(MyApp());
