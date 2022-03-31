@@ -1,0 +1,43 @@
+PODS:
+  - AFNetworking (3.2.1):
+    - AFNetworking/NSURLSession (= 3.2.1)
+    - AFNetworking/Reachability (= 3.2.1)
+    - AFNetworking/Security (= 3.2.1)
+    - AFNetworking/Serialization (= 3.2.1)
+    - AFNetworking/UIKit (= 3.2.1)
+  - AFNetworking/NSURLSession (3.2.1):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (3.2.1)
+  - AFNetworking/Security (3.2.1)
+  - AFNetworking/Serialization (3.2.1)
+  - AFNetworking/UIKit (3.2.1):
+    - AFNetworking/NSURLSession
+  - Flutter (1.0.0)
+  - zego_sudmpg_plugin (0.0.1):
+    - AFNetworking
+    - Flutter
+
+DEPENDENCIES:
+  - Flutter (from `Flutter`)
+  - zego_sudmpg_plugin (from `.symlinks/plugins/zego_sudmpg_plugin/ios`)
+
+SPEC REPOS:
+  trunk:
+    - AFNetworking
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: Flutter
+  zego_sudmpg_plugin:
+    :path: ".symlinks/plugins/zego_sudmpg_plugin/ios"
+
+SPEC CHECKSUMS:
+  AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
+  Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
+  zego_sudmpg_plugin: 590d4dbfa2e51b8cbdb039e1f2139d0a6c85784c
+
+PODFILE CHECKSUM: 5705308e5084d81df639b53de76ec780efe3bd1c
+
+COCOAPODS: 1.11.2

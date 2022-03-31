@@ -1,0 +1,61 @@
+<resources>
+    <string name="app_name">HelloSud-Android</string>
+    <string name="bumper_car">碰碰我最强</string>
+    <string name="bumper_car_custom">碰碰我最强(Custom)</string>
+    <string name="fly_cutter">飞刀达人</string>
+    <string name="fly_cutter_custom">飞刀达人(Custom)</string>
+    <string name="draw_guess">你画我猜</string>
+    <string name="draw_guess_custom">你画我猜(Custom)</string>
+    <string name="go_bang">五子棋</string>
+    <string name="go_bang_custom">五子棋(Custom)</string>
+    <string name="reversi">黑白棋</string>
+    <string name="reversi_custom">黑白棋(Custom)</string>
+    <string name="ludo">飞行棋</string>
+    <string name="ludo_custom">飞行棋(Custom)</string>
+    <string name="skating">短道速滑</string>
+    <string name="skating_custom">短道速滑(Custom)</string>
+    <string name="roll">数字转轮</string>
+    <string name="roll_custom">数字转轮(Custom)</string>
+    <string name="rsp">石头剪刀布</string>
+    <string name="rsp_custom">石头剪刀布(Custom)</string>
+    <string name="number_bomb">数字炸弹</string>
+    <string name="number_bomb_custom">数字炸弹(Custom)</string>
+    <string name="env_pro">pro环境</string>
+    <string name="env_sim">sim环境</string>
+    <string name="env_fat">fat环境</string>
+    <string name="env_dev">dev环境</string>
+    <string name="select_game_config">游戏配置</string>
+
+    <string-array name="langlist">
+        <item>zh-CN:中文(简体)</item>
+        <item>zh-HK:中文(香港)</item>
+        <item>zh-MO:中文(澳门)</item>
+        <item>zh-SG:中文(新加坡)</item>
+        <item>zh-TW:中文(繁体)</item>
+        <item>en-US:英语(美国)</item>
+        <item>en-GB:英语(英国)</item>
+        <item>ms-BN:马来语(文莱达鲁萨兰)</item>
+        <item>ms-MY:马来语(马来西亚)</item>
+        <item>vi-VN:越南语</item>
+        <item>th-TH:泰语</item>
+        <item>ko-KR:韩语</item>
+        <item>ja-JP:日语</item>
+        <item>es-ES:西班牙语</item>
+        <item>id-ID:印尼语</item>
+        <item>ar-SA:阿拉伯语</item>
+        <item>zh-zh:不存在语言</item>
+    </string-array>
+
+    <string-array name="gamelist">
+        <item>@string/bumper_car</item>
+        <item>@string/fly_cutter</item>
+        <item>@string/draw_guess</item>
+        <item>@string/go_bang</item>
+        <item>@string/reversi</item>
+        <item>@string/ludo</item>
+        <item>@string/skating</item>
+        <item>@string/roll</item>
+        <item>@string/rsp</item>
+        <item>@string/number_bomb</item>
+    </string-array>
+</resources>
