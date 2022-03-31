@@ -22,19 +22,19 @@ class _PlatformGameViewState extends State<PlatformGameView> {
           children: [
             GestureDetector(
                 onTap: (){
-                  _methodChannel.invokeMethod(GameUtils.MG_SELF_IN, {"isIn": true});
+                  GameUtils.getInstance().notifyAppCommonSelfIn(true, 0);
                 },
                 child: Text("加入游戏")
             ),
             GestureDetector(
                 onTap: (){
-                  _methodChannel.invokeMethod(GameUtils.MG_SELF_READY, {"isReady": true});
+                  GameUtils.getInstance().notifyAppCommonSelfReady(true);
                 },
                 child: Text("准备游戏")
             ),
             GestureDetector(
                 onTap: (){
-                  _methodChannel.invokeMethod(GameUtils.MG_SELF_PLAYING, {"isPlaying": true});
+                  GameUtils.getInstance().notifyAppCommonSelfPlaying(true);
                 },
                 child: Text("开始游戏")
             ),
@@ -45,51 +45,31 @@ class _PlatformGameViewState extends State<PlatformGameView> {
   }
 
   Widget platformView() {
+
+    var params = {
+      "roomId": "",
+      "userId":"",
+      "appCode":"", // appcode
+      "mgId":"", // 游戏id
+      "appKey": "", // appkey
+      "appId":"", // appId
+    };
+
     if(Platform.isAndroid){
       return AndroidView(
         viewType: 'zego_sudmpg_plugin/gameView',
-        // creationParams: const {
-        //   "roomId": "",
-        //   "userId":"",
-        //   "appCode":"",
-        //   "mgId":""
-        // },
+        creationParams: params,
         creationParamsCodec: const StandardMessageCodec(),
-        onPlatformViewCreated: _onVideGiftCreated,
         // hitTestBehavior: PlatformViewHitTestBehavior.transparent,
       );
     }else if (Platform.isIOS) {
       return UiKitView(
         viewType: 'zego_sudmpg_plugin/gameView',
-        // creationParams: const {
-        //   "roomId": "",
-        //   "userId":"",
-        //   "appCode":"",
-        //   "mgId":""
-        // },
+        creationParams: params,
         creationParamsCodec: const StandardMessageCodec(),
-        onPlatformViewCreated: _onVideGiftCreated,
         hitTestBehavior: PlatformViewHitTestBehavior.opaque,
       );
     }
     return Container();
-  }
-
-  late MethodChannel _methodChannel;
-
-  void _onVideGiftCreated(int id) {
-    var channelName = 'zego_sudmpg_plugin/gameView';
-    _methodChannel = MethodChannel(channelName);
-    _methodChannel.setMethodCallHandler((call) {
-      switch(call.method) {
-        case GameUtils.MG_EXPIRE_APP_CODE: {
-
-          // 更新code
-
-          return Future.value("success");
-        }
-      }
-      return Future.value("success");
-    });
   }
 }

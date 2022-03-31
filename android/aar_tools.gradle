@@ -28,7 +28,7 @@ void copyAar2Host(String pluginGroup) {
     rootProject.allprojects.each {
         p ->
             boolean isApp = p.plugins.hasPlugin("com.android.application")
-            println("${p.name} isHost --> ${isApp}")
+//            println("${p.name} isHost --> ${isApp}")
             if (p.group == pluginGroup) {
                 currentProject = p
                 println("Plugin project name --> $currentProject")
