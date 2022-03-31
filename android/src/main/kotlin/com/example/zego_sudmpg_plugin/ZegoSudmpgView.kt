@@ -87,6 +87,8 @@ class ZegoSudmpgView(private var context: Context, messenger: BinaryMessenger?, 
     }
 
     override fun dispose() {
+        Log.i(TAG, "dispose")
+        gameView.dispose()
     }
 
     override fun onMethodCall(call: MethodCall, result: MethodChannel.Result) {

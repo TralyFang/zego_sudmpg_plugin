@@ -181,8 +181,8 @@ public class SudMGCfg {
     }
 
     public class SudMGCfgUIJoinBtn {
-        boolean custom = true;
-        boolean hide = true;
+        boolean custom = false;
+        boolean hide = false;
     }
 
     public class SudMGCfgUICancelJoinBtn {
@@ -191,8 +191,8 @@ public class SudMGCfg {
     }
 
     public class SudMGCfgUIReadyBtn {
-        boolean custom = true;
-        boolean hide = true;
+        boolean custom = false;
+        boolean hide = false;
     }
 
     public class SudMGCfgUICancelReadyBtn {

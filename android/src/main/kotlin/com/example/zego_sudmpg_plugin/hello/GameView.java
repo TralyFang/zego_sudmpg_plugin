@@ -2,9 +2,11 @@ package com.example.zego_sudmpg_plugin.hello;
 
 
 import android.app.Activity;
+import android.app.Application;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
@@ -55,7 +57,7 @@ import tech.sud.mgp.core.SudMGP;
  * 游戏逻辑：加入游戏，准备游戏，取消准备，开始游戏
  * SudMGP类参考：https://github.com/SudTechnology/sud-mgp-doc/blob/main/Client/API/SudMGP.md
  */
-public class GameView {
+public class GameView implements Application.ActivityLifecycleCallbacks {
 
     private static final String kTag = "SudMGP--FlutterGameView";
 
@@ -70,6 +72,10 @@ public class GameView {
     private MethodChannel methodChannel;
 
     public void init(Activity context, FrameLayout frameLayout, MethodChannel methodChannel){
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            context.registerActivityLifecycleCallbacks(this);
+        }
 
         mContext = context;
         this.frameLayout = frameLayout;
@@ -525,6 +531,50 @@ public class GameView {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void dispose() {
+        Log.i(kTag, "dispose");
+        if (mISudFSTAPP != null) {
+            // 销毁游戏
+            mISudFSTAPP.destroyMG();
+        }
+    }
+
+    @Override
+    public void onActivityCreated(@NonNull Activity activity, @Nullable Bundle savedInstanceState) {
+        Log.i(kTag, "onActivityCreated");
+
+    }
+
+    @Override
+    public void onActivityStarted(@NonNull Activity activity) {
+        Log.i(kTag, "onActivityStarted");
+    }
+
+    @Override
+    public void onActivityResumed(@NonNull Activity activity) {
+        Log.i(kTag, "onActivityResumed");
+    }
+
+    @Override
+    public void onActivityPaused(@NonNull Activity activity) {
+        Log.i(kTag, "onActivityPaused");
+    }
+
+    @Override
+    public void onActivityStopped(@NonNull Activity activity) {
+        Log.i(kTag, "onActivityStopped");
+    }
+
+    @Override
+    public void onActivitySaveInstanceState(@NonNull Activity activity, @NonNull Bundle outState) {
+        Log.i(kTag, "onActivitySaveInstanceState");
+    }
+
+    @Override
+    public void onActivityDestroyed(@NonNull Activity activity) {
+        Log.i(kTag, "onActivityDestroyed");
     }
 
     /******************************/
