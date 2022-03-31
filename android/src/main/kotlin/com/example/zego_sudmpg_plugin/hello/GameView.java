@@ -136,7 +136,7 @@ public class GameView {
             @Override
             public void onSuccess() {
                 ToastUtils.showToast(mContext,"初始化游戏SDK成功"+MGConfig.getRoomId());
-                Log.i(kTag, "初始化游戏SDK成功"+MGConfig.getRoomId()+" mgId:"+MGConfig.getMMGID());
+                Log.i(kTag, "初始化游戏SDK成功"+MGConfig.getRoomId()+" mgId:"+MGConfig.getMMGID()+" userId:"+MGConfig.getUserId());
                 loadMG(mContext, MGConfig.getUserId(), MGConfig.getRoomId(), MGConfig.getAPP_Code(), MGConfig.getMMGID(), MGConfig.getKLanguage());
             }
 
