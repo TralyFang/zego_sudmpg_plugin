@@ -123,6 +123,9 @@ class ZegoSudmpgView(private var context: Context, messenger: BinaryMessenger?, 
                 GameUtils.MG_SELF_END->{ // 结束游戏
                     gameView.notifyAppCommonSelfEnd()
                 }
+                GameUtils.MG_DISPOSE->{ // 结束游戏
+                    dispose()
+                }
             }
         }else{
             print("MethodCall is null");

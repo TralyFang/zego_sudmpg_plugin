@@ -12,4 +12,6 @@ public class GameUtils {
     public static final String MG_SELF_KICK ="mg_self_kick"; // 踢人
     public static final String MG_SELF_CAPTAIN ="mg_self_captain"; // 设置队长
     public static final String MG_SELF_END ="mg_self_end"; // 结束游戏
+
+    public static final String MG_DISPOSE = "mg_dispose"; // 退出游戏了
 }
