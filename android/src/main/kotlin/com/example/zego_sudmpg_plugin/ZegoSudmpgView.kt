@@ -46,11 +46,6 @@ class ZegoSudmpgView(private var context: Context, messenger: BinaryMessenger?, 
     init {
 
         /// 需要外部传过来的必须参数
-//        ZegoMGManager.instance.roomId = params["roomId"].toString()
-//        ZegoMGManager.instance.userId = params["userId"].toString()
-//        ZegoMGManager.instance.APP_Code = params["appCode"].toString()
-//        ZegoMGManager.instance.mMGID = params["mgId"].toString().toLongOrNull() ?:SudMGCfg.MG_ID_BUMPER_CAR
-
         params["appKey"]?.toString()?.let {
             ZegoMGManager.instance.APP_KEY = it
         }
@@ -69,13 +64,17 @@ class ZegoSudmpgView(private var context: Context, messenger: BinaryMessenger?, 
         params["expireDate"]?.toString()?.let {
             ZegoMGManager.instance.APP_Code_expireDate = it
         }
-        if (params["mgId"]?.toString().isNullOrEmpty()){
+        var mgId = params["mgId"];
+        if (mgId?.toString().isNullOrEmpty()){
         }else {
-            params["mgId"]?.toString()?.toLong()?.let {
-                ZegoMGManager.instance.mMGID = it
+            if (mgId is Long) {
+                ZegoMGManager.instance.mMGID = mgId
+            }else {
+                mgId?.toString()?.toLong()?.let {
+                    ZegoMGManager.instance.mMGID = it
+                }
             }
         }
-
         Log.i(TAG, "gameInit.params: $params, mgId: ${ZegoMGManager.instance.mMGID}, appCode: ${ZegoMGManager.instance.APP_Code}")
 
         methodChannel.setMethodCallHandler(this)
