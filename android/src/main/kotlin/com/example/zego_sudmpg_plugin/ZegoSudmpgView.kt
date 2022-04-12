@@ -105,7 +105,9 @@ class ZegoSudmpgView(private var context: Context, messenger: BinaryMessenger?, 
                 }
                 GameUtils.MG_SELF_PLAYING->{ // 开始游戏
                     val isPlaying = call.argument<Boolean>("isPlaying") ?: false
-                    gameView.notifyAppCommonSelfPlaying(isPlaying)
+                    // 添加透传jsonString
+                    val extras = call.argument<String>("extras") ?: ""
+                    gameView.notifyAppCommonSelfPlaying(isPlaying, extras)
                 }
                 GameUtils.MG_SELF_CAPTAIN->{ // 设置队长
                     val captainUserId = call.argument<String>("captainUserId")

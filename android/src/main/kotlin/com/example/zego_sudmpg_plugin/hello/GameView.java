@@ -462,7 +462,7 @@ public class GameView implements Application.ActivityLifecycleCallbacks {
         }
     }
     /// 开始或结束游戏
-    public void notifyAppCommonSelfPlaying(boolean isPlaying) {
+    public void notifyAppCommonSelfPlaying(boolean isPlaying, String extras) {
         try {
             // 状态名称
             String state = SudMGPAPPState.APP_COMMON_SELF_PLAYING;
@@ -472,7 +472,7 @@ public class GameView implements Application.ActivityLifecycleCallbacks {
             jsonObject.put("isPlaying", isPlaying); // true 开始游戏，false 结束游戏
             if (isPlaying) {
                 // 透传的参数，Https服务会回调report_game_info参数
-//                jsonObject.put("reportGameInfoExtras", "divtoss");
+                jsonObject.put("reportGameInfoExtras", extras);
             }
             String dataJson = jsonObject.toString();
 

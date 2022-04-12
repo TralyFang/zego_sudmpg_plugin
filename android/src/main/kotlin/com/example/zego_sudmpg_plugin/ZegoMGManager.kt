@@ -23,8 +23,8 @@ class ZegoMGManager private constructor(){
 
     /** false:生产环境 true:测试环境  */
     var kIsTestEnv = true
-    /** 默认语言  */
-    var kLanguage = "zh-CN"
+    /** 默认语言  游戏语言 现支持，简体：zh-CN 繁体：zh-TW 英语：en-US 马来语：ms-MY */
+    var kLanguage = "en-US"
 
     /** 处理获取游戏视图信息  */
     var kSudMGCfg = SudMGCfg()
