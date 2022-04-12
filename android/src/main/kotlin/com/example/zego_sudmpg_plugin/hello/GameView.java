@@ -86,8 +86,6 @@ public class GameView implements Application.ActivityLifecycleCallbacks {
         }
         // 获取Code
         {
-            login(MGConfig.getUserId(), mAppLoginCallback);
-            /// TODO: Flutter的处理逻辑
             mAppLoginCallback.onLoginSuccess(0, MGConfig.getAPP_Code(), MGConfig.getAPP_Code_expireDate());
         }
     }
@@ -248,26 +246,6 @@ public class GameView implements Application.ActivityLifecycleCallbacks {
                 public void notImplemented() {
                 }
             });
-
-            login(MGConfig.getUserId(), new AppLoginListener() {
-                @Override
-                public void onLoginFailure(String errMsg) {
-                    Log.e(kTag, errMsg);
-                }
-
-                @Override
-                public void onLoginSuccess(int ret_code, String new_code, String expire_Date) {
-                    if (ret_code == 0) {    // 判断成功规则由"接入方服务端"确定，这里模拟接入服务器用ret_code == 0判断是否成功返回Code
-                        Log.i(kTag, "UpdateCode： Code=" + new_code + " Expire=" + expire_Date);
-                        MGConfig.setAPP_Code(new_code);
-                        if (mISudFSTAPP != null) {
-                            // 2.更新Code
-                            mISudFSTAPP.updateCode(MGConfig.getAPP_Code(), null);
-                        }
-                    }
-                }
-            });
-
             handle.success("{}");
         }
 
@@ -592,74 +570,6 @@ public class GameView implements Application.ActivityLifecycleCallbacks {
          * ret_code 状态码，自己服务器决定
          */
         void onLoginSuccess(int ret_code, String new_code, String expire_Date);
-    }
-
-    /**
-     * 参考sud-mgp-doc login
-     * 地址：https://github.com/SudTechnology/sud-mgp-doc/blob/main/Resource/startup.png
-     * 1. <接入方客户端>调用login接口，访问<接入方服务端>，获取Code
-     * 2. Code生成：<接入方服务端>调用<服务端接入SDK>API生成Code
-     * @param userId 接入方用户唯一ID
-     * @param listener 获取Code回调
-     */
-    private void login(String userId, AppLoginListener listener){
-        ///TODO: 测试代码，这里不需要处理，直接交给Flutter逻辑处理
-//        login1(userId, listener);
-    }
-    private void login1(String userId, AppLoginListener listener) {
-        OkHttpClient client = new OkHttpClient();
-        String req = "";
-        try {
-            JSONObject reqJsonObj = new JSONObject();
-            reqJsonObj.put("user_id", userId);
-            reqJsonObj.put("app_id", MGConfig.getAPP_ID());
-            req = reqJsonObj.toString();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        RequestBody body = RequestBody.create(req, MediaType.get("application/json; charset=utf-8"));
-        Request request = new Request.Builder()
-                .url(MGConfig.getKLoginUrl())
-                .post(body)
-                .build();
-        Log.d("tag", "request==="+request.toString()+"==="+body.toString()+req);
-        client.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                ThreadUtils.postUITask(() -> {
-                    if (listener != null) {
-                        listener.onLoginFailure(e.toString());
-                    }
-                });
-            }
-
-            @Override
-            public void onResponse(@NonNull Call call, @NonNull Response response) {
-                try {
-                    String dataJson = Objects.requireNonNull(response.body()).string();
-                    JSONObject jsonObject = new JSONObject(dataJson);
-                    int ret_code = jsonObject.getInt("ret_code");
-                    JSONObject dataObject = jsonObject.getJSONObject("data");
-                    String newCode = dataObject.getString("code");
-                    String expireDate = dataObject.getString("expire_date");
-                    String avatarUrl = dataObject.getString("avatar_url");
-                    Log.d("tag", "dataJson==="+dataJson);
-                    ThreadUtils.postUITask(() -> {
-                        if (listener != null) {
-                            listener.onLoginSuccess(ret_code, newCode, expireDate);
-                        }
-                    });
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    ThreadUtils.postUITask(() -> {
-                        if (listener != null) {
-                            listener.onLoginFailure(e.toString());
-                        }
-                    });
-                }
-            }
-        });
     }
     /*****************************/
 
