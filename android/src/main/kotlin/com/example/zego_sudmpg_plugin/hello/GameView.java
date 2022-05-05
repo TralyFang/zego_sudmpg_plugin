@@ -30,6 +30,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 import javax.xml.transform.Result;
@@ -375,12 +377,27 @@ public class GameView implements Application.ActivityLifecycleCallbacks {
                 //region 通用状态-玩家
                 case SudMGPMGState.MG_COMMON_PLAYER_IN:
 //                    handleMgCommonPlayerIn(userId, dataJson);
+                    try {
+                        JSONObject jsonObject = new JSONObject(dataJson);
+                        jsonObject.put("userId", userId);
+                        boolean isIn = jsonObject.getBoolean("isIn");
+                        Map<String, Object> data = new HashMap<>();
+                        data.put("userId", userId);
+                        data.put("isIn",isIn);
+                        methodChannel.invokeMethod(GameUtils.MG_JOIN_USERID, jsonObject.toString());
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                     break;
                 case SudMGPMGState.MG_COMMON_PLAYER_READY:
 //                    handleMgCommonPlayerReady(userId, dataJson);
                     break;
                 case SudMGPMGState.MG_COMMON_PLAYER_CAPTAIN:
-//                    handleMgCommonPlayerCaptain(userId, dataJson);
+                    // 队长需要同步设置为准备状态
+                    if (userId == MGConfig.getUserId()) {
+                        notifyAppCommonSelfReady(true);
+                    }
+//                    handleMgCommonPlayerCaptain(useuserId, dataJsonrId, dataJson);
                     break;
                 case SudMGPMGState.MG_COMMON_PLAYER_PLAYING:
 //                    handleMgCommonPlayerPlaying(userId, dataJson);
@@ -510,6 +527,62 @@ public class GameView implements Application.ActivityLifecycleCallbacks {
             e.printStackTrace();
         }
     }
+
+    /// 打开背景音乐+音效+震动
+    public void notifyAppCommonOpenSound(boolean isOpen) {
+        try {
+            // 状态名称
+            String state = SudMGPAPPState.APP_COMMON_OPEN_SOUND;
+
+            // 状态数据
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("isOpen", isOpen);
+            String dataJson = jsonObject.toString();
+
+            // 调用接口
+            mISudFSTAPP.notifyStateChange(state, dataJson, null);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        notifyAppCommonOpenBgMusic(isOpen);
+        notifyAppCommonOpenVibrate(isOpen);
+    }
+    // 打开背景音乐
+    void notifyAppCommonOpenBgMusic(boolean isOpen) {
+        try {
+            // 状态名称
+            String state = SudMGPAPPState.APP_COMMON_OPEN_BG_MUSIC;
+
+            // 状态数据
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("isOpen", isOpen);
+            String dataJson = jsonObject.toString();
+
+            // 调用接口
+            mISudFSTAPP.notifyStateChange(state, dataJson, null);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    // 打开震动
+    void notifyAppCommonOpenVibrate(boolean isOpen) {
+        try {
+            // 状态名称
+            String state = SudMGPAPPState.APP_COMMON_OPEN_VIBRATE;
+
+            // 状态数据
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("isOpen", isOpen);
+            String dataJson = jsonObject.toString();
+
+            // 调用接口
+            mISudFSTAPP.notifyStateChange(state, dataJson, null);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
     public void dispose() {
         Log.i(kTag, "dispose");

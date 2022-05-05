@@ -20,6 +20,7 @@ static NSString* MG_SELF_PLAYING         = @"mg_self_playing"; // 开始游戏
 static NSString* MG_SELF_KICK            = @"mg_self_kick"; // 踢人
 static NSString* MG_SELF_CAPTAIN         = @"mg_self_captain"; // 设置队长
 static NSString* MG_SELF_END             = @"mg_self_end"; // 结束游戏
-
+static NSString* MG_DISPOSE              = @"mg_dispose"; // 退出游戏了
+static NSString* MG_SELF_SOUND           = @"mg_self_sound"; // 打开游戏声音
 
 #endif /* GameUtils_h */

@@ -38,6 +38,10 @@
 - (nonnull UIView *)view {
     return _gameView;
 }
+- (void)alloc {
+    
+}
+
 -(void)onMethodCall:(FlutterMethodCall*)call result:(FlutterResult)result{
     NSLog(@"onMethodCall===%@===%@",[call method], [call arguments]);
     

@@ -127,6 +127,10 @@ class ZegoSudmpgView(private var context: Context, messenger: BinaryMessenger?, 
                 GameUtils.MG_DISPOSE->{ // 结束游戏
                     dispose()
                 }
+                GameUtils.MG_SELF_SOUND->{ // 打开声音
+                    val isOpen = call.argument<Boolean>("isOpen") ?: false
+                    gameView.notifyAppCommonOpenSound(isOpen)
+                }
             }
         }else{
             print("MethodCall is null");
