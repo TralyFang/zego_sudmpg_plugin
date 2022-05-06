@@ -19,11 +19,20 @@
     if ([super init]) {
         
         /// 需要外部传过来的必须参数
-//        ZegoMGManager.instance.roomId = params["roomId"].toString()
-//        ZegoMGManager.instance.userId = params["userId"].toString()
-//        ZegoMGManager.instance.APP_Code = params["appCode"].toString()
-//        ZegoMGManager.instance.mMGID = params["mgId"].toString().toLongOrNull() ?:SudMGCfg.MG_ID_BUMPER_CAR
-        
+        if ([args isKindOfClass:[NSDictionary class]]) {
+            NSDictionary *params = args;
+            ZegoMGManager.instance.roomId = [[params valueForKey:@"roomId"] stringValue];
+            ZegoMGManager.instance.userId = [[params valueForKey:@"userId"] stringValue];
+            ZegoMGManager.instance.appId = [[params valueForKey:@"appId"] stringValue];
+            ZegoMGManager.instance.appKey = [[params valueForKey:@"appKey"] stringValue];
+            ZegoMGManager.instance.APP_Code = [[params valueForKey:@"APP_Code"] stringValue];
+            ZegoMGManager.instance.APP_Code_expireDate = [[params valueForKey:@"expireDate"] stringValue];
+            if ([params valueForKey:@"mgId"]) {
+                ZegoMGManager.instance.mgId = [[params valueForKey:@"mgId"] longLongValue];
+            }
+        }
+        NSLog(@"gameInit.params: %@, mgId: %lld, appCode: %@", args, ZegoMGManager.instance.mgId, ZegoMGManager.instance.APP_Code);
+
         
         FlutterMethodChannel *channel = [FlutterMethodChannel methodChannelWithName:@"zego_sudmpg_plugin/gameView" binaryMessenger:messenger];
         __weak __typeof__(self) weakSelf = self;
@@ -71,7 +80,12 @@
         if ([dict objectForKey:@"isPlaying"]) {
             isReady = [[dict objectForKey:@"isPlaying"] boolValue];
         }
-        [_gameView notifyIsPlayingState:isReady];
+        // 添加透传jsonString
+        NSString *extras = @"";
+        if ([dict objectForKey:@"extras"]) {
+            extras = [[dict objectForKey:@"extras"] stringValue];
+        }
+        [_gameView notifyIsPlayingState:isReady extras:extras];
         
     }else if ([call.method isEqualToString:MG_SELF_CAPTAIN]) {// 设置队长
         NSDictionary *dict = [call arguments];
@@ -84,6 +98,13 @@
         [_gameView notifyKickStateWithUserId:userId];
     }else if ([call.method isEqualToString:MG_SELF_END]) { // 结束游戏
         [_gameView notifySetEnd];
+    }else if ([call.method isEqualToString:MG_SELF_SOUND]) { // 关闭声音
+        NSDictionary *dict = [call arguments];
+        bool isOpen = false;
+        if ([dict objectForKey:@"isOpen"]) {
+            isOpen = [[dict objectForKey:@"isOpen"] boolValue];
+        }
+        [_gameView notifyOpenSound:isOpen];
     }
 }
 

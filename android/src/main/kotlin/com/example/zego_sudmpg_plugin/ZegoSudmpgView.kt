@@ -78,10 +78,11 @@ class ZegoSudmpgView(private var context: Context, messenger: BinaryMessenger?, 
         Log.i(TAG, "gameInit.params: $params, mgId: ${ZegoMGManager.instance.mMGID}, appCode: ${ZegoMGManager.instance.APP_Code}")
 
         methodChannel.setMethodCallHandler(this)
+
+        gameView.init(mActivity, contentView, methodChannel)
     }
 
     override fun getView(): View {
-        gameView.init(mActivity, contentView, methodChannel)
         return contentView
     }
 

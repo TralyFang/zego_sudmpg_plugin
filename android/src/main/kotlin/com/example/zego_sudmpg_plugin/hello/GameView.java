@@ -90,6 +90,8 @@ public class GameView implements Application.ActivityLifecycleCallbacks {
         {
             mAppLoginCallback.onLoginSuccess(0, MGConfig.getAPP_Code(), MGConfig.getAPP_Code_expireDate());
         }
+        Log.i(kTag, "init");
+
     }
 
     /**
@@ -393,10 +395,6 @@ public class GameView implements Application.ActivityLifecycleCallbacks {
 //                    handleMgCommonPlayerReady(userId, dataJson);
                     break;
                 case SudMGPMGState.MG_COMMON_PLAYER_CAPTAIN:
-                    // 队长需要同步设置为准备状态
-                    if (userId == MGConfig.getUserId()) {
-                        notifyAppCommonSelfReady(true);
-                    }
 //                    handleMgCommonPlayerCaptain(useuserId, dataJsonrId, dataJson);
                     break;
                 case SudMGPMGState.MG_COMMON_PLAYER_PLAYING:
@@ -410,6 +408,33 @@ public class GameView implements Application.ActivityLifecycleCallbacks {
     };
 
     /********************** 游戏操作 ******************************/
+    boolean getLatestMgCommonPlayerInState() {
+        try {
+            String dataJson = mISudFSTAPP.getPlayerState(MGConfig.getUserId(), SudMGPMGState.MG_COMMON_PLAYER_IN);
+            JSONObject jsonObject = new JSONObject(dataJson);
+            if (jsonObject.has("isIn")) {
+                return jsonObject.getBoolean("isIn");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    boolean getLatestMgCommonPlayerCaptainState() {
+        try {
+            String dataJson = mISudFSTAPP.getPlayerState(MGConfig.getUserId(), SudMGPMGState.MG_COMMON_PLAYER_CAPTAIN);
+            JSONObject jsonObject = new JSONObject(dataJson);
+            if (jsonObject.has("isCaptain")) {
+                return jsonObject.getBoolean("isCaptain");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+
     /// 退出游戏
     public void notifyAppCommonSelfIn() {
         notifyAppCommonSelfIn(false, -1);

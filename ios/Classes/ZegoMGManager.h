@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy)   NSString *            userId;
 /// 当前用户登录的code
 @property (nonatomic, copy)   NSString *            APP_Code;
+@property (nonatomic, copy)   NSString                 * APP_Code_expireDate;
 
 @property (nonatomic, copy)   NSString                 * appId;
 @property (nonatomic, copy)   NSString                 * appKey;

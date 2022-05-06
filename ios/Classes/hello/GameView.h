@@ -29,7 +29,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// 停止游戏状态设置
 - (void)notifySetEnd;
 /// 游戏中状态设置
-- (void)notifyIsPlayingState:(BOOL)isPlaying;
+- (void)notifyIsPlayingState:(BOOL)isPlaying extras:(NSString *)extras;
+/// 打开或关闭游戏音效
+- (void)notifyOpenSound:(BOOL)isOpen;
+
 @end
 
 NS_ASSUME_NONNULL_END

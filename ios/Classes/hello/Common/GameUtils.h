@@ -12,6 +12,7 @@
 
 /****************Native层->flutter层******************/
 static NSString* MG_EXPIRE_APP_CODE      = @"mg_expire_app_code";// appCode过期回调，需要通知flutter获取最新code，去更新游戏code
+static NSString* MG_JOIN_USERID          = @"mg_join_userId"; // 加入游戏的用户
 
 /*******flutter层->Native层******************/
 static NSString* MG_SELF_IN              = @"mg_self_in"; // 加入游戏

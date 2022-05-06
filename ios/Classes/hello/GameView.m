@@ -396,9 +396,32 @@
 }
 
 /// 游戏中状态设置
-- (void)notifyIsPlayingState:(BOOL)isPlaying {
-    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@(isPlaying), @"isPlaying", nil];
+- (void)notifyIsPlayingState:(BOOL)isPlaying extras:(NSString *)extras {
+    NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObjectsAndKeys:@(isPlaying), @"isPlaying", nil];
+    if (isPlaying && extras != nil) {
+        [dic setValue:@"reportGameInfoExtras" forKey:extras];
+    }
     [self notifyStateChange:APP_COMMON_SELF_PLAYING dataJson:[Common dictionaryToJson:dic]];
+}
+
+/// 打开或关闭背景音乐111111
+- (void)notifyOpenMusic:(BOOL)isOpen {
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@(isOpen), @"isOpen", nil];
+    [self notifyStateChange:APP_COMMON_OPEN_BG_MUSIC dataJson:[Common dictionaryToJson:dic]];
+}
+
+/// 打开或关闭游戏音效
+- (void)notifyOpenSound:(BOOL)isOpen {
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@(isOpen), @"isOpen", nil];
+    [self notifyStateChange:APP_COMMON_OPEN_SOUND dataJson:[Common dictionaryToJson:dic]];
+    [self notifyOpenMusic:isOpen];
+    [self notifyOpenVibrate:isOpen];
+}
+
+/// 打开或关闭手机震动
+- (void)notifyOpenVibrate:(BOOL)isOpen {
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@(isOpen), @"isOpen", nil];
+    [self notifyStateChange:APP_COMMON_OPEN_VIBRATE dataJson:[Common dictionaryToJson:dic]];
 }
 
 #pragma mark =======游戏->APP状态处理=======
@@ -415,6 +438,7 @@
         }
         isIn = [[dic objectForKey:@"isIn"] boolValue];
     }
+    [_channel invokeMethod:MG_JOIN_USERID arguments:@{@"userId":userId, @"isIn": @(isIn)}];
     if (isIn) {
         /// 是否是当前用户的userid
         BOOL isCurrent = NO;
