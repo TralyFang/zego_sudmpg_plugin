@@ -65,31 +65,31 @@
 #pragma mark - =======login=======
 /// 登录到接入方服务器
 + (void)loginWithUserId:(NSString *)userid resultCallbckBlock:(void(^)(NSString *code, NSError *error, int retCode))resultCb {
-    AFHTTPSessionManager * manager = [AFHTTPSessionManager manager];
-    manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    // 是否允许无效证书, 默认为NO
-        manager.securityPolicy.allowInvalidCertificates = YES;
-        // 是否校验域名, 默认为YES
-        manager.securityPolicy.validatesDomainName = NO;
-    /// 这里的user_id是设置游戏中用户名，由接入方传入,这里uuid只是示例
-    NSDictionary * param = @{@"user_id" : [self getUserName]};
-    [manager POST:LOGIN_URL parameters:param progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSDictionary * dic = [responseObject objectForKey:@"data"];
-        /// 这里的code用于登录游戏sdk服务器
-        NSString * code = [dic objectForKey:@"code"];
-        int retCode = (int)[[dic objectForKey:@"ret_code"] longValue];
-        resultCb(code, nil, retCode);
-        [self invalidateHttpSession:manager];
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        resultCb(nil, error, -1);
-        [self invalidateHttpSession:manager];
-    }];
+//    AFHTTPSessionManager * manager = [AFHTTPSessionManager manager];
+//    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+//    // 是否允许无效证书, 默认为NO
+//        manager.securityPolicy.allowInvalidCertificates = YES;
+//        // 是否校验域名, 默认为YES
+//        manager.securityPolicy.validatesDomainName = NO;
+//    /// 这里的user_id是设置游戏中用户名，由接入方传入,这里uuid只是示例
+//    NSDictionary * param = @{@"user_id" : [self getUserName]};
+//    [manager POST:LOGIN_URL parameters:param progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+//        NSDictionary * dic = [responseObject objectForKey:@"data"];
+//        /// 这里的code用于登录游戏sdk服务器
+//        NSString * code = [dic objectForKey:@"code"];
+//        int retCode = (int)[[dic objectForKey:@"ret_code"] longValue];
+//        resultCb(code, nil, retCode);
+//        [self invalidateHttpSession:manager];
+//    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+//        resultCb(nil, error, -1);
+//        [self invalidateHttpSession:manager];
+//    }];
     
 }
 
 + (void)invalidateHttpSession:(AFHTTPSessionManager *)manager{
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-        [manager invalidateSessionCancelingTasks:YES];
+//        [manager invalidateSessionCancelingTasks:YES];
     });
 }
 
