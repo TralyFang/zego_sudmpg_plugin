@@ -132,6 +132,10 @@ class ZegoSudmpgView(private var context: Context, messenger: BinaryMessenger?, 
                     val isOpen = call.argument<Boolean>("isOpen") ?: false
                     gameView.notifyAppCommonOpenSound(isOpen)
                 }
+                GameUtils.MG_STATE_PLAYING->{ // 获取游戏是否开始状态
+                    var playing = gameView.mgCommonPlayerPlayingState;
+                    result.success(playing);
+                }
             }
         }else{
             print("MethodCall is null");

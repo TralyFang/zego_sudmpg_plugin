@@ -17,4 +17,5 @@ public class GameUtils {
     public static final String MG_DISPOSE = "mg_dispose"; // 退出游戏了
 
     public static final String MG_SELF_SOUND ="mg_self_sound"; // 打开游戏声音
+    public static final String MG_STATE_PLAYING = "mg_state_playing"; // 获取游戏是否开始状态
 }

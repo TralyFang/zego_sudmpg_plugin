@@ -411,7 +411,7 @@ public class GameView implements Application.ActivityLifecycleCallbacks {
     };
 
     /********************** 游戏操作 ******************************/
-    boolean getLatestMgCommonPlayerInState() {
+    boolean getMgCommonPlayerInState() {
         try {
             String dataJson = mISudFSTAPP.getPlayerState(MGConfig.getUserId(), SudMGPMGState.MG_COMMON_PLAYER_IN);
             JSONObject jsonObject = new JSONObject(dataJson);
@@ -424,12 +424,24 @@ public class GameView implements Application.ActivityLifecycleCallbacks {
         return false;
     }
 
-    boolean getLatestMgCommonPlayerCaptainState() {
+    boolean getMgCommonPlayerCaptainState() {
         try {
             String dataJson = mISudFSTAPP.getPlayerState(MGConfig.getUserId(), SudMGPMGState.MG_COMMON_PLAYER_CAPTAIN);
             JSONObject jsonObject = new JSONObject(dataJson);
             if (jsonObject.has("isCaptain")) {
                 return jsonObject.getBoolean("isCaptain");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    public boolean getMgCommonPlayerPlayingState() {
+        try {
+            String dataJson = mISudFSTAPP.getPlayerState(MGConfig.getUserId(), SudMGPMGState.MG_COMMON_PLAYER_PLAYING);
+            JSONObject jsonObject = new JSONObject(dataJson);
+            if (jsonObject.has("isPlaying")) {
+                return jsonObject.getBoolean("isPlaying");
             }
         } catch (Exception e) {
             e.printStackTrace();
