@@ -67,30 +67,31 @@
     _channel = channel;
     
     
+    [self gameSetup];
     /// TODO: 这里需要去掉，直接使用我们的服务器生成的code
-    
-    /// 登录到接入方服务器
-    _retryCount = 0;
-    [self login];
+//    /// 登录到接入方服务器
+//    _retryCount = 0;
+//    [self login];
     
     return self;
     
 }
 
 - (void)login {
-    if (_retryCount >= 3) {
-        return;
-    }
-    [Common loginWithUserId:ZegoMGManager.instance.userId resultCallbckBlock:^(NSString * _Nonnull code, NSError * _Nonnull error, int retCode) {
-        if (retCode == 0) {
-            ZegoMGManager.instance.APP_Code = code;
-            [self gameSetup];
-        }else {
-            NSLog(@"ISudFSMMG:loginWithUserId:登录到接入方服务器失败:%@",error);
-            self->_retryCount ++;
-            [self login];
-        }
-    }];
+//    if (_retryCount >= 3) {
+//        return;
+//    }
+//    [Common loginWithUserId:ZegoMGManager.instance.userId resultCallbckBlock:^(NSString * _Nonnull code, NSError * _Nonnull error, int retCode) {
+//        if (retCode == 0) {
+//            NSLog(@"ISudFSMMG:loginWithUserId:登录到接入方服务器成功！");
+//            ZegoMGManager.instance.APP_Code = code;
+//            [self gameSetup];
+//        }else {
+//            NSLog(@"ISudFSMMG:loginWithUserId:登录到接入方服务器失败:%@",error);
+//            self->_retryCount ++;
+//            [self login];
+//        }
+//    }];
 }
 
 #pragma mark - ======= Delegate =======

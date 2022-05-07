@@ -201,7 +201,7 @@ public class GameView implements Application.ActivityLifecycleCallbacks {
          */
         @Override
         public void onGameLog(String dataJson) {
-            Log.w(kTag, dataJson);
+            Log.d(kTag, "onGameLog："+dataJson);
         }
 
         /**
@@ -211,6 +211,7 @@ public class GameView implements Application.ActivityLifecycleCallbacks {
         @Override
         public void onGameStarted() {
             /** Activity的软键盘模式被改变，需要在此重新设置Activity的windowSoftInputMode */
+            Log.d(kTag, "onGameStarted");
         }
 
         /**
@@ -219,7 +220,7 @@ public class GameView implements Application.ActivityLifecycleCallbacks {
          */
         @Override
         public void onGameDestroyed() {
-
+            Log.d(kTag, "onGameDestroyed");
         }
 
         /**
@@ -231,6 +232,7 @@ public class GameView implements Application.ActivityLifecycleCallbacks {
          */
         @Override
         public void onExpireCode(ISudFSMStateHandle handle, String dataJson) {
+            Log.d(kTag, "onExpireCode："+ dataJson);
             // 1.重新获取Code
             methodChannel.invokeMethod(GameUtils.MG_EXPIRE_APP_CODE, dataJson, new MethodChannel.Result() {
                 @Override
@@ -261,6 +263,7 @@ public class GameView implements Application.ActivityLifecycleCallbacks {
          */
         @Override
         public void onGetGameViewInfo(final ISudFSMStateHandle handle, String dataJson) {
+            Log.d(kTag, "onExpireCode："+ dataJson);
             // 拿到游戏View的宽高
             final FrameLayout container = frameLayout;
             int gameViewWidth = container.getMeasuredWidth();
