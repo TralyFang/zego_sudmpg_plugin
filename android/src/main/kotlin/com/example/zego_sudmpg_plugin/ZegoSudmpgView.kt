@@ -133,7 +133,7 @@ class ZegoSudmpgView(private var context: Context, messenger: BinaryMessenger?, 
                     gameView.notifyAppCommonOpenSound(isOpen)
                 }
                 GameUtils.MG_STATE_PLAYING->{ // 获取游戏是否开始状态
-                    var playing = gameView.mgCommonPlayerPlayingState;
+                    var playing = gameView.mgCommonPlayerPlayingState
                     result.success(playing);
                 }
             }

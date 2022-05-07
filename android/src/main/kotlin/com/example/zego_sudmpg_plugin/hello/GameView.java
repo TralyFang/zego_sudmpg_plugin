@@ -212,6 +212,7 @@ public class GameView implements Application.ActivityLifecycleCallbacks {
         public void onGameStarted() {
             /** Activity的软键盘模式被改变，需要在此重新设置Activity的windowSoftInputMode */
             Log.d(kTag, "onGameStarted");
+            methodChannel.invokeMethod(GameUtils.MG_STATE_STARTED, true);
         }
 
         /**
@@ -389,7 +390,7 @@ public class GameView implements Application.ActivityLifecycleCallbacks {
                         Map<String, Object> data = new HashMap<>();
                         data.put("userId", userId);
                         data.put("isIn",isIn);
-                        methodChannel.invokeMethod(GameUtils.MG_JOIN_USERID, jsonObject.toString());
+                        methodChannel.invokeMethod(GameUtils.MG_JOIN_USERID, data);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
