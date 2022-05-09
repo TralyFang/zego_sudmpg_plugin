@@ -264,7 +264,7 @@ public class GameView implements Application.ActivityLifecycleCallbacks {
          */
         @Override
         public void onGetGameViewInfo(final ISudFSMStateHandle handle, String dataJson) {
-            Log.d(kTag, "onExpireCode："+ dataJson);
+            Log.d(kTag, "onGetGameViewInfo："+ dataJson);
             // 拿到游戏View的宽高
             final FrameLayout container = frameLayout;
             int gameViewWidth = container.getMeasuredWidth();
@@ -319,9 +319,9 @@ public class GameView implements Application.ActivityLifecycleCallbacks {
                 // 游戏安全操作区域
                 JSONObject viewGameRect = new JSONObject();
                 viewGameRect.put("left", 0);
-                viewGameRect.put("top", DensityUtils.dp2px(mContext, 90));
+                viewGameRect.put("top", (int)MGConfig.getGameViewTop());// DensityUtils.dp2px(mContext, 90)
                 viewGameRect.put("right", 0);
-                viewGameRect.put("bottom", DensityUtils.dp2px(mContext, 85));
+                viewGameRect.put("bottom", (int)MGConfig.getGameViewBottom());// DensityUtils.dp2px(mContext, 85)
                 jsonObject.put("view_game_rect", viewGameRect);
 
                 // 通知游戏

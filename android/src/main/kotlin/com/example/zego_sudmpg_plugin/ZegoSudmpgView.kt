@@ -75,6 +75,16 @@ class ZegoSudmpgView(private var context: Context, messenger: BinaryMessenger?, 
                 }
             }
         }
+        params["view_game_top"]?.let {
+            if (it is Double) {
+                ZegoMGManager.instance.gameViewTop = it
+            }
+        }
+        params["view_game_bottom"]?.let {
+            if (it is Double) {
+                ZegoMGManager.instance.gameViewBottom = it
+            }
+        }
         Log.i(TAG, "gameInit.params: $params, mgId: ${ZegoMGManager.instance.mMGID}, appCode: ${ZegoMGManager.instance.APP_Code}")
 
         methodChannel.setMethodCallHandler(this)

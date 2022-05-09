@@ -47,5 +47,9 @@ class ZegoMGManager private constructor(){
     /** Login获取Code的URL  */
     val kLoginUrl = "https://fat-mgp-hello.sudden.ltd/login/v3"
 
+    // 游戏缩进的安全边距
+    var gameViewTop = 90.0
+    var gameViewBottom = 85.0
+
 
 }
