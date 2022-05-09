@@ -161,11 +161,11 @@ public class SudMGCfg {
 
     public class SudMGCfgUILobbyPlayers {
         boolean custom = false;
-        boolean hide = false;//保留着后期可以去掉
+        boolean hide = true;
     }
 
     public class SudMGCfgUILobbyPlayerCaptainIcon {
-        boolean hide = false; //保留着后期可以去掉
+        boolean hide = true;
     }
 
     public class SudMGCfgUILobbyPlayerKickoutIcon {
