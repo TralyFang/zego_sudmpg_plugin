@@ -382,21 +382,10 @@ public class GameView implements Application.ActivityLifecycleCallbacks {
             switch (state) {
                 //region 通用状态-玩家
                 case SudMGPMGState.MG_COMMON_PLAYER_IN:
-//                    handleMgCommonPlayerIn(userId, dataJson);
-                    try {
-                        JSONObject jsonObject = new JSONObject(dataJson);
-                        jsonObject.put("userId", userId);
-                        boolean isIn = jsonObject.getBoolean("isIn");
-                        Map<String, Object> data = new HashMap<>();
-                        data.put("userId", userId);
-                        data.put("isIn",isIn);
-                        methodChannel.invokeMethod(GameUtils.MG_JOIN_USERID, data);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
+                    handleMgCommonPlayerIn(userId, dataJson);
                     break;
                 case SudMGPMGState.MG_COMMON_PLAYER_READY:
-//                    handleMgCommonPlayerReady(userId, dataJson);
+                    handleMgCommonPlayerReady(userId, dataJson);
                     break;
                 case SudMGPMGState.MG_COMMON_PLAYER_CAPTAIN:
 //                    handleMgCommonPlayerCaptain(useuserId, dataJsonrId, dataJson);
@@ -410,6 +399,34 @@ public class GameView implements Application.ActivityLifecycleCallbacks {
             handle.success("{\"ret_code\": 0, \"ret_msg\": \"success\"}");
         }
     };
+
+    void handleMgCommonPlayerIn(String userId, String dataJson) {
+        try {
+            JSONObject jsonObject = new JSONObject(dataJson);
+            jsonObject.put("userId", userId);
+            boolean isIn = jsonObject.getBoolean("isIn");
+            Map<String, Object> data = new HashMap<>();
+            data.put("userId", userId);
+            data.put("isIn",isIn);
+            methodChannel.invokeMethod(GameUtils.MG_JOIN_USERID, data);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    void handleMgCommonPlayerReady(String userId, String dataJson) {
+        try {
+            JSONObject jsonObject = new JSONObject(dataJson);
+            jsonObject.put("userId", userId);
+            boolean isReady = jsonObject.getBoolean("isReady");
+            Map<String, Object> data = new HashMap<>();
+            data.put("userId", userId);
+            data.put("isReady",isReady);
+            methodChannel.invokeMethod(GameUtils.MG_READY_USERID, data);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
 
     /********************** 游戏操作 ******************************/
     boolean getMgCommonPlayerInState() {
