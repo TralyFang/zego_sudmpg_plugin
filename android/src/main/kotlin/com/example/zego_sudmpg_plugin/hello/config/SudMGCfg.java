@@ -152,11 +152,11 @@ public class SudMGCfg {
     }
 
     public class SudMGCfgUILobbySettingBtn {
-        boolean hide = true;
+        boolean hide = false;
     }
 
     public class SudMGCfgUILobbyHelpBtn {
-        boolean hide = true;
+        boolean hide = false;
     }
 
     public class SudMGCfgUILobbyPlayers {
@@ -211,11 +211,11 @@ public class SudMGCfg {
     }
 
     public class SudMGCfgUIGameSettingBtn {
-        boolean hide = true;
+        boolean hide = false;
     }
 
     public class SudMGCfgUIGameHelpBtn {
-        boolean hide = true;
+        boolean hide = false;
     }
 
     public class SudMGCfgUIGameSettleCloseBtn {
