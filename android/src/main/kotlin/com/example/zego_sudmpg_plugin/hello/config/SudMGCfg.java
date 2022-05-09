@@ -161,11 +161,11 @@ public class SudMGCfg {
 
     public class SudMGCfgUILobbyPlayers {
         boolean custom = false;
-        boolean hide = false;
+        boolean hide = false;//保留着后期可以去掉
     }
 
     public class SudMGCfgUILobbyPlayerCaptainIcon {
-        boolean hide = false;
+        boolean hide = false; //保留着后期可以去掉
     }
 
     public class SudMGCfgUILobbyPlayerKickoutIcon {
@@ -182,7 +182,7 @@ public class SudMGCfg {
 
     public class SudMGCfgUIJoinBtn {
         boolean custom = false;
-        boolean hide = false;
+        boolean hide = true;
     }
 
     public class SudMGCfgUICancelJoinBtn {
@@ -192,7 +192,7 @@ public class SudMGCfg {
 
     public class SudMGCfgUIReadyBtn {
         boolean custom = false;
-        boolean hide = false;
+        boolean hide = true;
     }
 
     public class SudMGCfgUICancelReadyBtn {
