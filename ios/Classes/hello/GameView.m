@@ -429,7 +429,7 @@
 - (void)notifyIsPlayingState:(BOOL)isPlaying extras:(NSString *)extras {
     NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObjectsAndKeys:@(isPlaying), @"isPlaying", nil];
     if (isPlaying && extras != nil) {
-        [dic setValue:@"reportGameInfoExtras" forKey:extras];
+        [dic setValue:extras forKey:@"reportGameInfoExtras"];
     }
     [self notifyStateChange:APP_COMMON_SELF_PLAYING dataJson:[Common dictionaryToJson:dic]];
 }
