@@ -25,7 +25,7 @@
             ZegoMGManager.instance.userId = [[params valueForKey:@"userId"] stringValue];
             ZegoMGManager.instance.appId = [[params valueForKey:@"appId"] stringValue];
             ZegoMGManager.instance.appKey = [[params valueForKey:@"appKey"] stringValue];
-            ZegoMGManager.instance.APP_Code = [[params valueForKey:@"APP_Code"] stringValue];
+            ZegoMGManager.instance.APP_Code = [[params valueForKey:@"appCode"] stringValue];
             ZegoMGManager.instance.APP_Code_expireDate = [[params valueForKey:@"expireDate"] stringValue];
             if ([params valueForKey:@"mgId"]) {
                 ZegoMGManager.instance.mgId = [[params valueForKey:@"mgId"] longLongValue];

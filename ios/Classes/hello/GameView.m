@@ -317,7 +317,9 @@
 
 /// 销毁MG
 - (void)destroyMG {
-    [self.fsmAPP2MG destroyMG];
+    if (self.fsmAPP2MG != nil) {
+        [self.fsmAPP2MG destroyMG];
+    }
 }
 /// 加载游戏MG
 /// @param userId 用户唯一ID
