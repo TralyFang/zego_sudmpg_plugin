@@ -32,7 +32,10 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)notifyIsPlayingState:(BOOL)isPlaying extras:(NSString *)extras;
 /// 打开或关闭游戏音效
 - (void)notifyOpenSound:(BOOL)isOpen;
-
+/// 是否正在游戏中
+- (BOOL)getMgCommonPlayerPlayingState;
+/// 销毁MG
+- (void)destroyMG;
 @end
 
 NS_ASSUME_NONNULL_END

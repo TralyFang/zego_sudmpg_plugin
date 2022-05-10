@@ -38,6 +38,7 @@
         _appKey = APP_KEY;
         _APP_Code = @"";
         _isTestEnv = kIsTestEnv;
+        _gameViewTop = _gameViewBottom = 110;
     }
     return self;
 }

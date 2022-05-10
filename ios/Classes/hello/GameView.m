@@ -111,13 +111,14 @@
  */
 -(void)onGameStarted {
     NSLog(@"ISudFSMMG:onGameStarted:游戏开始");
+    [_channel invokeMethod:MG_STATE_STARTED arguments:@(true)];
 }
 
 /**
  * 游戏销毁
  */
 -(void) onGameDestroyed {
-    NSLog(@"ISudFSMMG:onGameDestroyed:游戏开始");
+    NSLog(@"ISudFSMMG:onGameDestroyed:游戏销毁");
 }
 
 /**
@@ -160,10 +161,16 @@
     CGRect rect = [[UIScreen mainScreen] bounds];
     CGFloat scale = [[UIScreen mainScreen] nativeScale];
     
-    CGFloat top = 110 * scale;
+    CGFloat top = [ZegoMGManager instance].gameViewTop * scale;
+    CGFloat bottom = [ZegoMGManager instance].gameViewBottom * scale;
     CGFloat width = rect.size.width * scale;
     CGFloat height = rect.size.height * scale;
-    NSDictionary *rectDict = [NSDictionary dictionaryWithObjectsAndKeys:@(top), @"top", @(0), @"left", @(top), @"bottom", @(0), @"right", nil];
+    NSDictionary *rectDict = [NSDictionary dictionaryWithObjectsAndKeys:
+                              @(top), @"top",
+                              @(0), @"left",
+                              @(bottom), @"bottom",
+                              @(0), @"right",
+                              nil];
     NSDictionary *viewDict = [NSDictionary dictionaryWithObjectsAndKeys:@(width), @"width", @(height), @"height", nil];
     NSDictionary *dataDict = [NSDictionary dictionaryWithObjectsAndKeys:@(0), @"ret_code", @"return form APP onGetGameViewInfo", @"ret_msg", viewDict, @"view_size", rectDict, @"view_game_rect", nil];
     /// 回调
@@ -351,6 +358,26 @@
     }
 }
 #pragma mark =======APP->游戏状态处理=======
+/// 是否正在游戏中
+- (BOOL)getMgCommonPlayerPlayingState {
+    /// 是否正在游戏中
+    BOOL isPlaying = NO;
+    NSString *dataJson = [self.fsmAPP2MG getGameState:MG_COMMON_PLAYER_PLAYING];
+    NSDictionary * dic = [Common turnStringToDictionary:dataJson];
+    if (dic) {
+        /// 错误处理
+        NSInteger retCode = [[dic objectForKey:@"retCode"] integerValue];
+        if (retCode != 0) {
+            [self handleRetCode:[NSString stringWithFormat:@"%ld",(long)retCode] errorMsg:MG_COMMON_PLAYER_PLAYING];
+            return false;
+        }
+        
+        isPlaying = [[dic objectForKey:@"isPlaying"] boolValue];
+    }
+    return isPlaying;
+}
+
+
 /// 状态通知（app to mg）
 /// @param state 状态名称
 /// @param dataJson 需传递的json
@@ -405,7 +432,7 @@
     [self notifyStateChange:APP_COMMON_SELF_PLAYING dataJson:[Common dictionaryToJson:dic]];
 }
 
-/// 打开或关闭背景音乐111111
+/// 打开或关闭背景音乐
 - (void)notifyOpenMusic:(BOOL)isOpen {
     NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@(isOpen), @"isOpen", nil];
     [self notifyStateChange:APP_COMMON_OPEN_BG_MUSIC dataJson:[Common dictionaryToJson:dic]];
@@ -468,6 +495,7 @@
         }
         isReady = [[dic objectForKey:@"isReady"] boolValue];
     }
+    [_channel invokeMethod:MG_READY_USERID arguments:@{@"userId":userId, @"isReady": @(isReady)}];
     if (isReady) {
 //        [self.seatView setUserId:userId seatState:SeatState_prepared];
     }else {
@@ -548,6 +576,10 @@
 
 - (void)handleState_MG_DG_SCORE_WithUserId:(NSString *)userId dataJson:(NSString *)dataJson {
     /// 本次积分
+}
+
+- (void)dealloc {
+    [self destroyMG];
 }
 
 @end

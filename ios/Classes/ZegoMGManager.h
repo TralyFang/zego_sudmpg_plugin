@@ -22,6 +22,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) int64_t                    mgId;
 @property (nonatomic, copy)   NSString                 * language;
 @property (nonatomic, assign) BOOL                      isTestEnv;
+// 游戏缩进的安全边距
+@property (nonatomic, assign) double gameViewTop;
+@property (nonatomic, assign) double  gameViewBottom;
 /// 游戏UI配置
 //@property (nonatomic, strong) GameUIConfigurationModel * configurationModel;
 

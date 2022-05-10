@@ -30,6 +30,12 @@
             if ([params valueForKey:@"mgId"]) {
                 ZegoMGManager.instance.mgId = [[params valueForKey:@"mgId"] longLongValue];
             }
+            if ([params valueForKey:@"view_game_top"]) {
+                ZegoMGManager.instance.gameViewTop = [[params valueForKey:@"view_game_top"] doubleValue];
+            }
+            if ([params valueForKey:@"view_game_bottom"]) {
+                ZegoMGManager.instance.gameViewBottom = [[params valueForKey:@"view_game_bottom"] doubleValue];
+            }
         }
         NSLog(@"gameInit.params: %@, mgId: %lld, appCode: %@", args, ZegoMGManager.instance.mgId, ZegoMGManager.instance.APP_Code);
 
@@ -47,8 +53,8 @@
 - (nonnull UIView *)view {
     return _gameView;
 }
-- (void)alloc {
-    
+- (void)dealloc {
+    [_gameView destroyMG];
 }
 
 -(void)onMethodCall:(FlutterMethodCall*)call result:(FlutterResult)result{
@@ -105,6 +111,11 @@
             isOpen = [[dict objectForKey:@"isOpen"] boolValue];
         }
         [_gameView notifyOpenSound:isOpen];
+    }else if ([call.method isEqualToString:MG_STATE_PLAYING]){ // 获取游戏是否开始状态
+        bool playing = [_gameView getMgCommonPlayerPlayingState];
+        if (result != nil) {
+            result(@(playing));
+        }
     }
 }
 
