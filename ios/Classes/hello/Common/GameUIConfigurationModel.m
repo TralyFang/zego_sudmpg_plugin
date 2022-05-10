@@ -250,8 +250,8 @@
     GameUIConfigurationSubNodeModel * customNode = [self getSubNodeWithParamName:@"custom" state:custom];
     GameUIConfigurationSubNodeModel * hideNode = [self getSubNodeWithParamName:@"hide" state:hide];
     // 单独设置状态
-    customNode.state = custom;
-    hideNode.state = hide;
+//    customNode.state = custom;
+//    hideNode.state = hide;
     return @[customNode, hideNode];
 }
 
