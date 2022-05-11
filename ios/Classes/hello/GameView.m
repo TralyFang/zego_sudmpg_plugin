@@ -205,7 +205,7 @@
  * @param dataJson 回调json
  */
 -(void)onGameStateChange:(id<ISudFSMStateHandle>) handle state:(NSString*) state dataJson:(NSString*) dataJson {
-    NSLog(@"ISudFSMMG:onGameStateChange:游戏->APP:state:%@",state);
+    NSLog(@"ISudFSMMG:onGameStateChange:游戏->APP:state:%@ --dataJson: %@",state, dataJson);
 }
 
 /**

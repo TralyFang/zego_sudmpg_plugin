@@ -36,6 +36,10 @@
             if ([params valueForKey:@"view_game_bottom"]) {
                 ZegoMGManager.instance.gameViewBottom = [[params valueForKey:@"view_game_bottom"] doubleValue];
             }
+            ZegoMGManager.instance.language = [[params valueForKey:@"language"] stringValue];
+            if ([params valueForKey:@"isTestEnv"]) {
+                ZegoMGManager.instance.isTestEnv = [[params valueForKey:@"isTestEnv"] boolValue];
+            }
         }
         NSLog(@"gameInit.params: %@, mgId: %lld, appCode: %@", args, ZegoMGManager.instance.mgId, ZegoMGManager.instance.APP_Code);
 

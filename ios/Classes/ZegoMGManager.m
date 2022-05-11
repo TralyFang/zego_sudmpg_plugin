@@ -33,7 +33,7 @@
         _roomId = mRoomID;
         _userId = [Common getUserName];
         _mgId = MG_ID_BUMPER;
-        _language = @"zh-CN";
+        _language = @"en-US";
         _appId = APP_ID;
         _appKey = APP_KEY;
         _APP_Code = @"";

@@ -85,6 +85,14 @@ class ZegoSudmpgView(private var context: Context, messenger: BinaryMessenger?, 
                 ZegoMGManager.instance.gameViewBottom = it
             }
         }
+        params["isTestEnv"]?.let {
+            if (it is Boolean) {
+                ZegoMGManager.instance.kIsTestEnv = it
+            }
+        }
+        params["language"]?.toString()?.let {
+            ZegoMGManager.instance.kLanguage = it
+        }
         Log.i(TAG, "gameInit.params: $params, mgId: ${ZegoMGManager.instance.mMGID}, appCode: ${ZegoMGManager.instance.APP_Code}")
 
         methodChannel.setMethodCallHandler(this)
