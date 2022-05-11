@@ -211,7 +211,7 @@ public class GameView implements Application.ActivityLifecycleCallbacks {
                 JSONObject jsonObject = new JSONObject(dataJson);
                 String state = jsonObject.getString("state");
                 String error = jsonObject.getString("level");
-                if (state == SudMGPMGState.MG_COMMON_PLAYER_PLAYING && error == "error") {
+                if (state.equals(SudMGPMGState.MG_COMMON_PLAYER_PLAYING) && error.equals("error")) {
                     methodChannel.invokeMethod(GameUtils.MG_STATE_START_EXCEPTION, dataJson);
                 }
             } catch (JSONException e) {
