@@ -7,6 +7,7 @@ public class GameUtils {
     public static final String MG_JOIN_USERID = "mg_join_userId"; // 加入游戏的用户
     public static final String MG_READY_USERID = "mg_ready_userId"; // 准备游戏的用户
     public static final String MG_STATE_STARTED = "mg_state_started"; // 游戏已经加载完成
+    public static final String MG_STATE_START_EXCEPTION = "mg_state_start_exception"; // 游戏开始异常需要上报服务器
 
     /****************flutter层->Native层******************/
     public static final String MG_SELF_IN ="mg_self_in"; // 加入游戏

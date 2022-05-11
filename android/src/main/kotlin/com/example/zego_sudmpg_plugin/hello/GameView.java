@@ -202,6 +202,21 @@ public class GameView implements Application.ActivityLifecycleCallbacks {
         @Override
         public void onGameLog(String dataJson) {
             Log.d(kTag, "onGameLog："+dataJson);
+//            ISudFSMMG:onGameLog:{
+//            "level":"error",
+//            "msg":"errorCode=100504, start game fail-----",
+//            "state":"mg_common_player_playing",
+//            "tag":"SudMGP-MG"}
+            try {
+                JSONObject jsonObject = new JSONObject(dataJson);
+                String state = jsonObject.getString("state");
+                String error = jsonObject.getString("error");
+                if (state == SudMGPMGState.MG_COMMON_PLAYER_PLAYING && !error.isEmpty()) {
+                    methodChannel.invokeMethod(GameUtils.MG_STATE_START_EXCEPTION, dataJson);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
 
         /**
