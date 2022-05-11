@@ -210,8 +210,8 @@ public class GameView implements Application.ActivityLifecycleCallbacks {
             try {
                 JSONObject jsonObject = new JSONObject(dataJson);
                 String state = jsonObject.getString("state");
-                String error = jsonObject.getString("error");
-                if (state == SudMGPMGState.MG_COMMON_PLAYER_PLAYING && !error.isEmpty()) {
+                String error = jsonObject.getString("level");
+                if (state == SudMGPMGState.MG_COMMON_PLAYER_PLAYING && error == "error") {
                     methodChannel.invokeMethod(GameUtils.MG_STATE_START_EXCEPTION, dataJson);
                 }
             } catch (JSONException e) {
